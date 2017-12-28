@@ -7,6 +7,7 @@ use sapper::{SapperApp, SapperAppShell, Request, Response, Result as SapperResul
 use forustm::{Redis, create_redis_pool, create_pg_pool, Postgresql};
 use forustm::web::*;
 use forustm::{get_identity_and_web_context, Permissions, WebContext};
+use forustm::backend;
 
 struct WebApp;
 
@@ -30,6 +31,7 @@ fn main() {
     let pg_pool = create_pg_pool();
     let mut app = SapperApp::new();
     let port = 8081;
+
     app.address("0.0.0.0")
         .port(port)
         .init_global(Box::new(move |req: &mut Request| {
@@ -42,8 +44,14 @@ fn main() {
         .add_module(Box::new(WebSection))
         .add_module(Box::new(WebArticle))
         .add_module(Box::new(Home))
-        .add_module(Box::new(WebAdminSection))
-        .static_service(true);
+        .add_module(Box::new(WebAdminSection));
+    
+    for controller in backend::controller_list {
+        app.add_module(controller);
+    }
+
+    app.static_service(true)
+        .not_found_page(sapper_std::render("404.html", sapper_std::Context::new() ));
 
     println!("Start listen on http://{}:{}", "0.0.0.0", port);
     app.run_http();

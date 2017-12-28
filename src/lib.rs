@@ -31,6 +31,7 @@ pub mod util;
 pub mod models;
 pub mod web;
 pub mod web_wechat;
+pub mod backend;
 
 pub(crate) use util::{sha3_256_encode, random_string, markdown_render, send_reset_password_email};
 pub(crate) use schema::{article, ruser, section, comment};
