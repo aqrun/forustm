@@ -13,7 +13,7 @@ impl ArticleController {
 
         res_html!("backend/article/index.html", web)
     }
-/*
+
     // 详情
     fn view(req: &mut Request) -> SapperResult<Response> {
         let web = req.ext().get::<WebContext>().unwrap().clone();
@@ -25,31 +25,32 @@ impl ArticleController {
     fn add(req: &mut Request) -> SapperResult<Response> {
         let web = req.ext().get::<WebContext>().unwrap().clone();
 
-        res.html!("backend/article/add.html", web)
+        res_html!("backend/article/add.html", web)
     }
 
     // update article
-    fn update(){
+    fn update(req: &mut Request) -> SapperResult<Response> {
         let web = req.ext().get::<WebContext>().unwrap().clone();
 
-        res.html!("backend/article/update.html", web)
+        res_html!("backend/article/update.html", web)
     }
 
     // delete a article
-    fn delete(){
+    fn delete(req: &mut Request) -> SapperResult<Response> {
         let web = req.ext().get::<WebContext>().unwrap().clone();
 
-        res.html!("backend/article/delete.html", web)
-    }*/
+        res_html!("backend/article/delete.html", web)
+    }
 
 }
 
 impl SapperModule for ArticleController {
     fn router(&self, router: &mut SapperRouter) -> SapperResult<()> {
         router.get("/backend/article", ArticleController::index);
-        // router.get("/backend/article/add", ArticleController::add);
-        // router.get("/backend/article/update", ArticleController::update);
-        // router.get("/backend/article/delete", ArticleController::delete);
+        router.get("/backend/article/view", ArticleController::view);
+        router.get("/backend/article/add", ArticleController::add);
+        router.get("/backend/article/update", ArticleController::update);
+        router.get("/backend/article/delete", ArticleController::delete);
         Ok(())
     }
 }

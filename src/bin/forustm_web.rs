@@ -46,9 +46,7 @@ fn main() {
         .add_module(Box::new(Home))
         .add_module(Box::new(WebAdminSection));
     
-    for controller in backend::controller_list {
-        app.add_module(controller);
-    }
+    backend::init_controllers(&mut app);
 
     app.static_service(true)
         .not_found_page(sapper_std::render("404.html", sapper_std::Context::new() ));
