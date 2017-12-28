@@ -107,6 +107,10 @@
         word-wrap: break-word;
     }
 
+    .detail-body p, #comments p {
+        line-height: 24px;
+    }
+
     .detail-body a {
         text-decoration: underline;
         color: blue;
@@ -120,21 +124,20 @@
         max-width: 100%;
     }
 
-    .detail-body pre {
+    pre {
         background: #eee;
         padding: 0px;
         border-radius: 6px;
         font-family: "Source Code Pro", Menlo, Monaco, Consolas, "DejaVu Sans Mono", Inconsolata, monospace;
-        white-space: pre-wrap;
     }
 
-    .detail-body pre code {
+    pre code {
         border-radius: 4px;
     }
 
-    .detail-body div code,
-    .detail-body p code,
-    .detail-body ul code
+    div code,
+    p code,
+    ul code
     {
         border-radius: 4px;
         background: pink;
