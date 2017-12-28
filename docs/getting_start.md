@@ -14,7 +14,7 @@
 
 ```rust
 forustm $  cargo build
-forustm $  diesel setup
+forustm $  diesel setup   //创建数据库forustm和表
 forustm $  cargo run --bin forustm_web
 forustm $  cargo run --bin forustm_api
 ```
